@@ -5,9 +5,12 @@ from src.exception import CustomException
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
+from src.components.Data_transformation import DataTransformtionConfig
+from src.components.Data_transformation import DataTransformation
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..",".."))
 
+@dataclass
 class DataIngestionConfig:
     train_data_path: str = os.path.join(PROJECT_ROOT, "artifacts", "train.csv")
     test_data_path: str = os.path.join(PROJECT_ROOT, "artifacts", "test.csv")
@@ -45,4 +48,7 @@ class DataIngestion:
 
 if __name__ == "__main__":
     obj = DataIngestion()
-    obj.initiate_data_ingestion()   
+    train_data, test_data = obj.initiate_data_ingestion()
+
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_data, test_data)   
