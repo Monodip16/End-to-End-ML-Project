@@ -45,8 +45,11 @@ class ModelTrainer:
                 "Gradient Boosting": GradientBoostingRegressor(),
                 "XGBRegressor": XGBRegressor(),
                 "CatBoosting Regressor": CatBoostRegressor(verbose=False),
-                "AdaBoost Regressor": AdaBoostRegressor()
+                "AdaBoost Regressor": AdaBoostRegressor(),
+                "K-Neighbors Regressor": KNeighborsRegressor()
 
             }
+
+            
         except Exception as e:
             raise CustomException(e, sys)
