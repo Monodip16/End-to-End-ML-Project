@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreline | Student Performance Predictor</title>
+    <style>
+        :root { --ink: #17242d; --muted: #64727a; --paper: #f5f1e9; --accent: #e36d45; --line: #d9d2c5; }
+        * { box-sizing: border-box; }
+        body { margin: 0; color: var(--ink); background: var(--paper); font-family: Georgia, 'Times New Roman', serif; }
+        main { min-height: 100vh; display: grid; grid-template-columns: minmax(280px, 0.8fr) minmax(420px, 1.2fr); }
+        .intro { padding: clamp(2rem, 7vw, 7rem); display: flex; flex-direction: column; justify-content: space-between; background: #1d3940; color: #f8f3e9; }
+        .eyebrow { color: #f3a37c; font: 700 0.75rem Arial, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; }
+        h1 { max-width: 560px; margin: 1.5rem 0; font-size: clamp(3.4rem, 7vw, 7.5rem); line-height: 0.9; font-weight: 400; }
+        .intro p { max-width: 410px; color: #cbd8d5; font: 1.05rem/1.6 Arial, sans-serif; }
+        .note { color: #9fb6b1; font: 0.78rem Arial, sans-serif; }
+        .form-wrap { padding: clamp(2rem, 7vw, 7rem); display: flex; align-items: center; }
+        form { width: 100%; max-width: 640px; }
+        h2 { margin: 0 0 0.5rem; font-size: clamp(1.8rem, 3vw, 2.7rem); font-weight: 400; }
+        .subhead { margin: 0 0 2rem; color: var(--muted); font: 0.95rem/1.5 Arial, sans-serif; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+        label { display: block; color: var(--muted); font: 700 0.72rem Arial, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }
+        select, input { width: 100%; margin-top: 0.5rem; padding: 0.9rem 0.8rem; border: 1px solid var(--line); border-radius: 2px; color: var(--ink); background: #fffdf8; font: 0.96rem Arial, sans-serif; }
+        input:focus, select:focus { outline: 2px solid #f3a37c; outline-offset: 1px; }
+        .action { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 2rem; }
+        button { border: 0; border-radius: 2px; padding: 1rem 1.4rem; color: #fff; background: var(--accent); cursor: pointer; font: 700 0.8rem Arial, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }
+        button:hover { background: #c9512d; }
+        .range { color: var(--muted); font: 0.8rem Arial, sans-serif; }
+        @media (max-width: 800px) { main { display: block; } .intro { min-height: 52vh; } .form-wrap { padding: 2.5rem 1.4rem; } }
+        @media (max-width: 500px) { .grid { grid-template-columns: 1fr; } .action { align-items: flex-start; flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="intro">
+            <div>
+                <div class="eyebrow">Scoreline / 01</div>
+                <h1>Read the shape of a score.</h1>
+                <p>A focused estimate of a student's math performance, built from learning context and reading and writing results.</p>
+            </div>
+            <div class="note">Machine learning model · Regression estimate</div>
+        </section>
+        <section class="form-wrap">
+            <form action="/predict" method="post">
+                <h2>Student profile</h2>
+                <p class="subhead">Enter the details below to generate an estimated math score.</p>
+                <div class="grid">
+                    <label>Gender<select name="gender" required><option value="female">Female</option><option value="male">Male</option></select></label>
+                    <label>Race / ethnicity<select name="race_ethnicity" required><option value="group A">Group A</option><option value="group B">Group B</option><option value="group C" selected>Group C</option><option value="group D">Group D</option><option value="group E">Group E</option></select></label>
+                    <label>Parental education<select name="parental_level_of_education" required><option value="some high school">Some high school</option><option value="high school">High school</option><option value="some college">Some college</option><option value="associate's degree" selected>Associate's degree</option><option value="bachelor's degree">Bachelor's degree</option><option value="master's degree">Master's degree</option></select></label>
+                    <label>Lunch<select name="lunch" required><option value="standard" selected>Standard</option><option value="free/reduced">Free / reduced</option></select></label>
+                    <label>Test preparation<select name="test_preparation_course" required><option value="none" selected>None</option><option value="completed">Completed</option></select></label>
+                    <label>Reading score<input type="number" name="reading_score" min="0" max="100" required placeholder="0–100"></label>
+                    <label>Writing score<input type="number" name="writing_score" min="0" max="100" required placeholder="0–100"></label>
+                </div>
+                <div class="action"><span class="range">Scores must be between 0 and 100.</span><button type="submit">Predict math score →</button></div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
