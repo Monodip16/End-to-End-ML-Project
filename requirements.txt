@@ -1,4 +1,5 @@
 pandas
+flask
 matplotlib
 numpy
 seaborn
